@@ -17,7 +17,6 @@ public class DemoController {
 
 	@GetMapping(path = "/candidates")
 	public ResponseEntity<?> getCandidates(HttpServletRequest request) {
-		String response = "Aneesh Kohli";
 		return ResponseEntity.ok().body(demoService.getCandidates());
 	}
 }

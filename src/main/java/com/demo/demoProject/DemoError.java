@@ -19,7 +19,13 @@ public enum DemoError {
 	
 	VOTE_CASTED("Vote Casted Successfully to %s"),
 	
-	CANDIDATE_ADDED("Candidate added successfully")
+	CANDIDATE_ADDED("Candidate added successfully"),
+	
+	CANDIDATE_ERROR("Requsted Candidate does not exist yet for voting"),
+	
+	CANDIDATE_VOTE_ERROR("Candidate does not exist to count vote"),
+	
+	INVALID_CANDIDATE_LIST("No Candidate has got higher votes")
 	;
 	
 	

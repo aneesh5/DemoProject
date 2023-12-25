@@ -20,7 +20,7 @@ public class DemoDao {
 			candidatesMap.put(candidateName, candidatesMap.get(candidateName) + 1);
 		}
 		else {
-			throw new IllegalArgumentException("Candidate is not present to vote");
+			throw new IllegalArgumentException(DemoError.CANDIDATE_ERROR.getError());
 		}
 		
 	}
@@ -30,7 +30,7 @@ public class DemoDao {
 			return candidatesMap.get(candidateName);
 		}
 		else {
-			throw new IllegalArgumentException("Candidate does not exist to count vote");
+			throw new IllegalArgumentException(DemoError.CANDIDATE_VOTE_ERROR.getError());
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class DemoDao {
 		if (winnerExists.isPresent())
 			return winnerExists.get();
 		else
-			throw new IllegalArgumentException("No Candidate has got higher votes");
+			throw new IllegalArgumentException(DemoError.INVALID_CANDIDATE_LIST.getError());
 		
 	}
 }

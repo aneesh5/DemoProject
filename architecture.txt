@@ -1,0 +1,6 @@
+Singleton Design Pattern:
+
+The project is build in Singleton design pattern because Singleton design pattern is a creational pattern that ensures a class has only one instance and provides a global point of access to that instance. 
+It is one of the simplest design patterns but is important in scenarios where exactly one instance of a class is needed to coordinate actions across the system.
+
+I've incorporated essential dependencies, such as Lombok for code simplification, Jackson for efficient JSON processing, and Spring WebMVC to enhance the project's user interface, making it more fluid and interactive 

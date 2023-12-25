@@ -32,28 +32,28 @@ public class DemoController {
 			return ResponseEntity.status(HttpStatus.CREATED).body("Candidate Added Successfully");
 		}
 		catch(IllegalArgumentException e ) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_ADDING_CANDIDATE.getError(), e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 		catch(Exception e) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_ADDING_CANDIDATE.getError(), e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
 	
 	@PostMapping(path = "/castVote")
 	public ResponseEntity<?> castVote(HttpServletRequest request,
-											@RequestParam(name = "name", required = true) String candidateName) {
+									@RequestParam(name = "name", required = true) String candidateName) {
 		try {
 			demoService.castVote(candidateName);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Vote Casted Successfully to " + candidateName);
 		}
 		catch(IllegalArgumentException e ) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_CASTING_VOTE.getError(), e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 		catch(Exception e) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_CASTING_VOTE.getError(), e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
@@ -66,11 +66,11 @@ public class DemoController {
 			return ResponseEntity.status(HttpStatus.OK).body("Vote count for " + candidateName + " is : " + voteCount);
 		}
 		catch(IllegalArgumentException e ) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_COUNTING_VOTE.getError(), e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 		catch(Exception e) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_CASTING_VOTE.getError(), e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
@@ -82,11 +82,11 @@ public class DemoController {
 			return ResponseEntity.status(HttpStatus.OK).body(voteListings);
 		}
 		catch(IllegalArgumentException e ) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_LISTING_VOTE.getError(), e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 		catch(Exception e) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_LISTING_VOTE.getError(), e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
@@ -98,11 +98,11 @@ public class DemoController {
 			return ResponseEntity.status(HttpStatus.OK).body(winnerCandidate.getKey() + " is the winner with " + winnerCandidate.getValue() + " votes");
 		}
 		catch(IllegalArgumentException e ) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_GETTING_WINNER.getError(), e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 		catch(Exception e) {
-			logger.error("Error occured while adding a candidate", e.getMessage());
+			logger.error(DemoError.ERROR_GETTING_WINNER.getError(), e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}

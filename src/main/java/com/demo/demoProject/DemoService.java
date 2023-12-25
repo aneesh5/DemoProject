@@ -18,6 +18,7 @@ public class DemoService implements IDemoService {
 
 	@Override
 	public void addCandidate(String name) {
+		// Validate requested name 
 		if(StringUtils.isBlank(name)) 
 			throw new IllegalArgumentException(DemoError.CANDIDATE_CANNOT_BE_EMPTY.getError());
 		
@@ -26,6 +27,7 @@ public class DemoService implements IDemoService {
 	
 	@Override
 	public void castVote(String name) {
+		// Validate requested name 
 		if(StringUtils.isBlank(name)) 
 			throw new IllegalArgumentException(DemoError.CANDIDATE_CANNOT_BE_EMPTY.getError());
 		
@@ -34,6 +36,7 @@ public class DemoService implements IDemoService {
 	
 	@Override
 	public Integer countVote(String name) {
+		// Validate requested name 
 		if(StringUtils.isBlank(name)) 
 			throw new IllegalArgumentException(DemoError.CANDIDATE_CANNOT_BE_EMPTY.getError());
 		
@@ -43,8 +46,14 @@ public class DemoService implements IDemoService {
 	@Override
 	public String listVotings() {
 		HashMap<String, Integer> mapData = demoDao.listVotings();
+		
+		// validate map before converting to json
+		if (mapData.isEmpty())
+			throw new IllegalArgumentException(DemoError.EMPTY_CANDIDATES.getError());
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 	    try {
+	    	// converting hashmap data to json format using Object Mapper
 			String jacksonData = objectMapper.writeValueAsString(mapData);
 			return jacksonData;
 		} catch (JsonProcessingException e) {

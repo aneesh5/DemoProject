@@ -27,7 +27,9 @@ public enum DemoError {
 	
 	INVALID_CANDIDATE_LIST("No Candidate has got higher votes"),
 	
-	CANDIDATE_CANNOT_BE_EMPTY("Candidate name cannot be empty")
+	CANDIDATE_CANNOT_BE_EMPTY("Candidate name cannot be empty"),
+	
+	EMPTY_CANDIDATES("Candidates are empty")
 	;
 	
 	

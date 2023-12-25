@@ -39,6 +39,7 @@ public class DemoDao {
 	}
 	
 	public Map.Entry<String, Integer> getWinner() {
+		// finding the maximum votes achieved candidate
 		Optional<Map.Entry<String, Integer>> winnerExists = candidatesMap.entrySet().stream().max(Map.Entry.comparingByValue());
 		if (winnerExists.isPresent())
 			return winnerExists.get();

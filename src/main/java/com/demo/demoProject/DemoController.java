@@ -24,6 +24,10 @@ public class DemoController {
 	
 	private static final Logger logger = (Logger) LoggerFactory.getLogger(DemoController.class);
 
+	/**
+	 * @apiNote To enter candidate for voting
+	 * @param candidateName
+	 */
 	@PostMapping(path = "/entercandidate")
 	public ResponseEntity<?> addCandidate(HttpServletRequest request,
 											@RequestParam(name = "name", required = true) String candidateName) {
@@ -41,6 +45,10 @@ public class DemoController {
 		}
 	}
 	
+	/**
+	 * @apiNote To cast voting
+	 * @param candidateName
+	 */
 	@PostMapping(path = "/castVote")
 	public ResponseEntity<?> castVote(HttpServletRequest request,
 									@RequestParam(name = "name", required = true) String candidateName) {
@@ -58,6 +66,10 @@ public class DemoController {
 		}
 	}
 	
+	/**
+	 * @apiNote To count vote based on requested candidate name
+	 * @param candidateName
+	 */
 	@GetMapping(path = "/countVote")
 	public ResponseEntity<?> countVote(HttpServletRequest request,
 											@RequestParam(name = "name", required = true) String candidateName) {
@@ -75,6 +87,10 @@ public class DemoController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @apiNote To show voter list in JSON Format
+	 */
 	@GetMapping(path = "/listVote")
 	public ResponseEntity<?> listVote(HttpServletRequest request) {
 		try {
@@ -91,11 +107,15 @@ public class DemoController {
 		}
 	}
 	
+	/**
+	 * @apiNote To show winner based on highest number votes
+	 */
 	@GetMapping(path = "/getWinner")
 	public ResponseEntity<?> getWinner(HttpServletRequest request) {
 		try {
 			Map.Entry<String, Integer> winnerCandidate = demoService.getWinner();
-			return ResponseEntity.status(HttpStatus.OK).body(String.format(DemoError.WINNER.getError(), winnerCandidate.getKey(), winnerCandidate.getValue()));
+			return ResponseEntity.status(HttpStatus.OK).body(String.format(DemoError.WINNER.getError(), winnerCandidate.getKey(), 
+					winnerCandidate.getValue()));
 		}
 		catch(IllegalArgumentException e ) {
 			logger.error(DemoError.ERROR_GETTING_WINNER.getError(), e.getMessage());

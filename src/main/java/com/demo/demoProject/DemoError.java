@@ -25,7 +25,9 @@ public enum DemoError {
 	
 	CANDIDATE_VOTE_ERROR("Candidate does not exist to count vote"),
 	
-	INVALID_CANDIDATE_LIST("No Candidate has got higher votes")
+	INVALID_CANDIDATE_LIST("No Candidate has got higher votes"),
+	
+	CANDIDATE_CANNOT_BE_EMPTY("Candidate name cannot be empty")
 	;
 	
 	

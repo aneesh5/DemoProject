@@ -1,33 +1,47 @@
 package com.demo.demoProject;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class ApplicationTest {
+	
+    private static final String CANDIDATE_NAME = "Ajay";
+    
+    @Test
+    public void testEnterCandidate() {
+        ElectionSystem electionSystem = new ElectionSystem();
 
-    private static final String HELLO_ENDPOINT = "api/hello";
+        // Enter a candidate
+        electionSystem.enterCandidate(CANDIDATE_NAME);
 
-    @Value(value = "${local.server.port}")
-    private int port;
+        // Check if the candidate was added with a vote count of 0
+        assertEquals(0, electionSystem.getVoteCount(CANDIDATE_NAME));
+    }
+    
+    @Test
+    public void testCastVoteForValidCandidate() {
+        ElectionSystem electionSystem = new ElectionSystem();
+        electionSystem.enterCandidate(CANDIDATE_NAME);
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+        // Cast a vote for a valid candidate
+        int newVoteCount = electionSystem.castVote(CANDIDATE_NAME);
+
+        // Check if the vote count was incremented
+        assertEquals(1, newVoteCount);
+    }
 
     @Test
-    void contextLoads() {
-    }
+    public void testCastVoteForInvalidCandidate() {
+        ElectionSystem electionSystem = new ElectionSystem();
+        electionSystem.enterCandidate(CANDIDATE_NAME);
 
-    private String getHelloEndpointUrl() {
-        return getLocalServerUrl() + HELLO_ENDPOINT;
-    }
+        // Cast a vote for an invalid candidate
+        int newVoteCount = electionSystem.castVote("Aneesh");
 
-    private String getLocalServerUrl() {
-        return String.format("http://localhost:%d/", port);
+        // Check if the vote count remains unchanged (should return -1)
+        assertEquals(-1, newVoteCount);
     }
 }

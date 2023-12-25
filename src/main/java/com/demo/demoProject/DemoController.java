@@ -29,7 +29,7 @@ public class DemoController {
 											@RequestParam(name = "name", required = true) String candidateName) {
 		try {
 			demoService.addCandidate(candidateName);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Candidate Added Successfully");
+			return ResponseEntity.status(HttpStatus.CREATED).body(DemoError.CANDIDATE_ADDED.getError());
 		}
 		catch(IllegalArgumentException e ) {
 			logger.error(DemoError.ERROR_ADDING_CANDIDATE.getError(), e.getMessage());
@@ -46,7 +46,7 @@ public class DemoController {
 									@RequestParam(name = "name", required = true) String candidateName) {
 		try {
 			demoService.castVote(candidateName);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Vote Casted Successfully to " + candidateName);
+			return ResponseEntity.status(HttpStatus.CREATED).body(String.format(DemoError.VOTE_CASTED.getError(), candidateName));
 		}
 		catch(IllegalArgumentException e ) {
 			logger.error(DemoError.ERROR_CASTING_VOTE.getError(), e.getMessage());
@@ -63,7 +63,7 @@ public class DemoController {
 											@RequestParam(name = "name", required = true) String candidateName) {
 		try {
 			Integer voteCount = demoService.countVote(candidateName);
-			return ResponseEntity.status(HttpStatus.OK).body("Vote count for " + candidateName + " is : " + voteCount);
+			return ResponseEntity.status(HttpStatus.OK).body(String.format(DemoError.VOTE_COUNT.getError(), candidateName, voteCount));
 		}
 		catch(IllegalArgumentException e ) {
 			logger.error(DemoError.ERROR_COUNTING_VOTE.getError(), e.getMessage());
@@ -95,7 +95,7 @@ public class DemoController {
 	public ResponseEntity<?> getWinner(HttpServletRequest request) {
 		try {
 			Map.Entry<String, Integer> winnerCandidate = demoService.getWinner();
-			return ResponseEntity.status(HttpStatus.OK).body(winnerCandidate.getKey() + " is the winner with " + winnerCandidate.getValue() + " votes");
+			return ResponseEntity.status(HttpStatus.OK).body(String.format(DemoError.WINNER.getError(), winnerCandidate.getKey(), winnerCandidate.getValue()));
 		}
 		catch(IllegalArgumentException e ) {
 			logger.error(DemoError.ERROR_GETTING_WINNER.getError(), e.getMessage());

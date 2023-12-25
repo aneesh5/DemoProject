@@ -11,7 +11,15 @@ public enum DemoError {
 	
 	ERROR_LISTING_VOTE("Error occured while listing votes"),
 	
-	ERROR_GETTING_WINNER("Error occured while getting winner")
+	ERROR_GETTING_WINNER("Error occured while getting winner"),
+	
+	WINNER("%s is the winner with %s votes"),
+	
+	VOTE_COUNT("Vote count for %s candidate is %s"),
+	
+	VOTE_CASTED("Vote Casted Successfully to %s"),
+	
+	CANDIDATE_ADDED("Candidate added successfully")
 	;
 	
 	
